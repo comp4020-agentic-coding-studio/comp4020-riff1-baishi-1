@@ -1,16 +1,366 @@
-body {
-  margin: 0;
-  padding: 2rem;
-  font-family: system-ui, sans-serif;
-  line-height: 1.6;
-  color: #1a1a1a;
+/* Ten Thousand Shrimp — a shrine to Qi Baishi, styled the way a devoted fan
+   page would have looked in 1999: tiled background, a marquee banner, table
+   borders as decoration, and a visitor counter nobody could verify. */
+
+:root {
+  --ink: #1a0f0a;
+  --paper: #f4e9d8;
+  --seal-red: #a6192e;
+  --seal-red-dark: #7a1121;
+  --gold: #b8860b;
+  --link: #00e;
+  --link-visited: #551a8b;
 }
 
-main {
-  max-width: 40rem;
+* {
+  box-sizing: border-box;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+html {
+  /* Fluid base size: readable from a 390px phone up to a 1920px desktop
+     without a media-query ladder. */
+  font-size: clamp(15px, 1.4vw, 18px);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.6;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 3px 3px, rgb(166 25 46 / 8%) 1.5px, transparent 0),
+    radial-gradient(circle at 13px 13px, rgb(184 134 11 / 10%) 1.5px, transparent 0);
+  background-size: 16px 16px;
+}
+
+.page {
+  max-width: 46rem;
   margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+/* ---- header + marquee banner ---- */
+
+footer p {
+  margin: 0.3rem 0;
+}
+
+header {
+  border-bottom: 6px double var(--seal-red);
+  margin-bottom: 1.5rem;
+}
+
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--ink);
+  color: var(--gold);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0;
+}
+
+.marquee p {
+  display: inline-block;
+  margin: 0;
+  padding-left: 100%;
+  animation: scroll-left 22s linear infinite;
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee p {
+    animation: none;
+    padding-left: 1rem;
+  }
+}
+
+.site-title {
+  text-align: center;
+  padding: 1.25rem 0.5rem 0.75rem;
+}
+
+.site-title .glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 2px;
+  background: var(--seal-red);
+  color: var(--paper);
+  font-size: 1.4rem;
+  font-family: Georgia, serif;
+  transform: rotate(-3deg);
+  box-shadow: 2px 2px 0 var(--seal-red-dark);
+}
+
+.tagline {
+  text-align: center;
+  margin: 0.25rem 0 0;
+  font-style: italic;
+  color: var(--seal-red-dark);
 }
 
 a {
-  color: #0b5fff;
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--link-visited);
+}
+
+/* ---- nav ---- */
+
+nav[aria-label="Primary"] {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 1rem 0 0;
+  padding: 0.6rem;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--gold) 0,
+    var(--gold) 10px,
+    var(--seal-red) 10px,
+    var(--seal-red) 20px
+  );
+}
+
+nav[aria-label="Primary"] ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  background: var(--paper);
+  width: 100%;
+}
+
+nav[aria-label="Primary"] a {
+  display: inline-block;
+  padding: 0.3rem 0.65rem;
+  border: 2px outset var(--gold);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+nav[aria-label="Primary"] a:hover,
+nav[aria-label="Primary"] a:focus-visible {
+  border-style: inset;
+  background: var(--seal-red);
+}
+
+nav[aria-label="Primary"] a[aria-current="page"] {
+  background: var(--seal-red);
+  border-style: inset;
+}
+
+/* ---- main content ---- */
+
+main {
+  background: rgb(255 253 246 / 88%);
+  border: 3px ridge var(--gold);
+  padding: 1.25rem clamp(1rem, 4vw, 2.5rem) 1.75rem;
+  margin-top: 1.25rem;
+}
+
+main h1 {
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  color: var(--seal-red-dark);
+  border-bottom: 3px double var(--gold);
+  padding-bottom: 0.35rem;
+}
+
+.site-title .wordmark {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 0 0.6rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  letter-spacing: 0.03em;
+  text-shadow: 2px 2px 0 var(--gold);
+}
+
+main h2 {
+  color: var(--seal-red);
+  font-size: 1.2rem;
+}
+
+.rule {
+  border: 0;
+  height: 6px;
+  margin: 1.75rem 0;
+  background: linear-gradient(
+    90deg,
+    var(--seal-red),
+    var(--gold),
+    var(--seal-red),
+    var(--gold)
+  );
+}
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid var(--seal-red);
+  background: rgb(166 25 46 / 6%);
+  font-style: italic;
+}
+
+/* ---- gallery table ---- */
+
+.gallery-wrap {
+  overflow-x: auto;
+}
+
+table.gallery {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+table.gallery caption {
+  text-align: left;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  color: var(--seal-red-dark);
+}
+
+table.gallery th,
+table.gallery td {
+  border: 2px solid var(--gold);
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+table.gallery th {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+table.gallery tr:nth-child(even) td {
+  background: rgb(184 134 11 / 8%);
+}
+
+/* ---- badges ---- */
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 1.25rem 0;
+}
+
+.badge {
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  padding: 0.4rem 0.7rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.75rem;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.badge.under-construction {
+  background: repeating-linear-gradient(
+    45deg,
+    #ffd83d 0,
+    #ffd83d 10px,
+    var(--ink) 10px,
+    var(--ink) 20px
+  );
+  color: var(--paper);
+  text-shadow: 1px 1px 0 #000;
+  font-weight: bold;
+}
+
+/* ---- visitor counter ---- */
+
+.counter {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 1.5rem 0;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.counter .digits {
+  display: flex;
+  gap: 2px;
+}
+
+.counter .digits span {
+  display: inline-block;
+  min-width: 1.1em;
+  padding: 0.15em 0.3em;
+  background: var(--ink);
+  color: #3dff6e;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+/* ---- guestbook ---- */
+
+.guestbook-entry {
+  border: 2px groove var(--gold);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  background: rgb(255 255 255 / 60%);
+}
+
+.guestbook-entry .signed {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.85rem;
+  color: var(--seal-red-dark);
+}
+
+/* ---- footer ---- */
+
+footer {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--ink);
+  border-top: 6px double var(--seal-red);
 }

@@ -3,23 +3,90 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>COMP4020 prototype</title>
+    <title>Ten Thousand Shrimp :: a shrine to Qi Baishi</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header>
-      <nav aria-label="Primary">
-        <a href="./">Home</a>
-      </nav>
-    </header>
-    <main>
-      <h1>COMP4020 prototype</h1>
-      <p data-testid="intro">
-        Replace this with your prototype. This week's brief is on the course
-        website; <code>spec/README.md</code> explains how the checks in this
-        repo relate to it.
-      </p>
-    </main>
-    <script type="module" src="./main.ts"></script>
+    <div class="page">
+      <header>
+        <div class="marquee" role="presentation">
+          <p>
+            welcome, welcome, WELCOME to the shrine ~*~ best viewed at
+            800x600 ~*~ sign the guestbook before you leave ~*~ under the
+            brush since 1864 ~*~
+          </p>
+        </div>
+        <div class="site-title">
+          <span class="glyph" aria-hidden="true">白</span>
+          <p class="wordmark">Ten Thousand Shrimp</p>
+        </div>
+        <p class="tagline">an unofficial shrine to Qi Baishi (齐白石), 1864&ndash;1957</p>
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="./" aria-current="page">Home</a></li>
+            <li><a href="biography.html">Biography</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="philosophy.html">Philosophy</a></li>
+            <li><a href="guestbook.html">Guestbook</a></li>
+            <li><a href="links.html">Links &amp; Further Reading</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <h1>Welcome, fellow traveller of the ink-and-brush web</h1>
+        <p data-testid="intro">
+          You have found the personal shrine of a very small obsession: the
+          carpenter from Xiangtan who picked up a brush in his late twenties
+          and became, by the end of a very long life, the most reproduced
+          painter China had ever seen. This page exists because his shrimp
+          deserve a website, and the 1998 web is the only web that would let
+          them have one properly.
+        </p>
+        <p>
+          Qi Baishi never went to art academy. He carved furniture, then
+          learned to paint from local masters and from looking very hard at
+          actual shrimp in an actual bowl of water on his actual desk. Forty
+          years later museums in Beijing built whole rooms around what came
+          out of that bowl. Poke around &mdash; there is a
+          <a href="biography.html">life story</a>, a
+          <a href="gallery.html">gallery</a> of his most famous subjects
+          described in words instead of pixels, a page on his
+          <a href="philosophy.html">painting philosophy</a>, a
+          <a href="guestbook.html">guestbook</a> you are warmly invited to
+          sign, and some <a href="links.html">further reading</a> for the
+          real museums that hold the real paintings.
+        </p>
+
+        <hr class="rule" />
+
+        <div class="badge-row">
+          <div class="badge under-construction">
+            🦐<br />GALLERY<br />ALWAYS<br />GROWING
+          </div>
+          <div class="badge">
+            BEST VIEWED IN<br />NETSCAPE NAVIGATOR<br />800&times;600
+          </div>
+          <div class="badge">
+            NO<br />FRAMES<br />NO<br />FLASH
+          </div>
+        </div>
+
+        <p class="counter">
+          You are visitor number
+          <span class="digits" aria-hidden="true">
+            <span>0</span><span>0</span><span>2</span><span>6</span
+            ><span>8</span><span>6</span>
+          </span>
+          <span class="sr-only">visitor number 002686</span>
+          since this shrine opened.
+        </p>
+      </main>
+
+      <footer>
+        <p>&copy; a small shrine, maintained with a brush and a stubborn CSS file.</p>
+        <p>Page last repainted: 2026.</p>
+      </footer>
+    </div>
   </body>
 </html>
