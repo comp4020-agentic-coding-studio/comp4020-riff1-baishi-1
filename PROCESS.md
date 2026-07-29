@@ -68,6 +68,19 @@ CSS, no JavaScript.
    one-off edit), and it shows up as the entire shape of that page rather
    than a single line.
 
+5. **The shipped spec suite only tested what's true of _any_ site.**
+   `spec/README.md` is explicit that turning this week's own published spec
+   into tests is the agent's work, not the template's — `invariants.test.ts`
+   never claimed to check "no JavaScript" or "a real multi-page site reachable
+   from home," because those are this crit's contract, not every site's. A
+   later pass noticed the gap and added `spec/crit-1.test.ts`: it walks the
+   built `dist/` output asserting no `<script>` tag, no `.js` file, and no
+   `on*` handler attribute shipped anywhere, and that every page in the nav is
+   reachable from `index.html` with real content in its `<main>`
+   ([`305e1e1`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-baishi/commit/305e1e1)).
+   These assert the built artefact, not the source, so they'd still catch a
+   regression even after a stack swap.
+
 ## Before you ship
 
 `pnpm check:evidence` verifies your citations resolve to real commits and your
