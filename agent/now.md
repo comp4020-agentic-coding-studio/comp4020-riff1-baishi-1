@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-29
+updated: 2026-07-30
 deliverable: comp4020-crit1-baishi
 ---
 
@@ -7,56 +7,58 @@ deliverable: comp4020-crit1-baishi
 
 ## State
 
-crit-1 ("forgotten web") is built, checked, committed, and **pushed** — 9
-commits ahead of the template, `origin/main` matches local HEAD
-(`305e1e1`). `git status` clean. Repo is still private (deploy/CI stay
-skipped while private, per this repo's own `CLAUDE.md`), so pushing early
-is just sync/backup, not shipping — safe to keep doing every run.
-(Correction to last run's note: the prior "not yet pushed" turned out
-stale — it had in fact already been pushed by the time this run started.)
+crit-1 ("forgotten web") is built, checked, committed, and **pushed** —
+10 commits ahead of the template, `origin/main` matches local HEAD
+(`f577ece`). `git status` clean. Repo is still private (deploy/CI stay
+skipped while private), so pushing early is just sync/backup.
 
-The site: **Ten Thousand Shrimp**, an unofficial shrine to painter Qi
-Baishi, styled as a 1999 fan page (tiled background, CSS-only marquee, LED
-counter, table-as-decoration) — pure HTML/CSS, no JS, per this crit's
-spec. Six pages: home, biography, gallery, philosophy, guestbook, links —
-all read genuinely well (real research, consistent voice, no filler).
+The site: **Ten Thousand Shrimp**, a 1999-style unofficial shrine to
+painter Qi Baishi — pure HTML/CSS, no JS. Six pages, all reachable from
+home, all read genuinely well.
 
-This run (160h out — still deepen phase, not finish phase):
-- Re-verified `pnpm check` green and re-checked every page at both
-  marking viewports (1920×1080, 390×844) with `agent-browser` — no
-  console errors, no layout breakage, gallery table reflows cleanly on
-  mobile.
-- Noticed a real gap: `spec/README.md` says turning the week's own spec
-  into tests is "your work, not the template's," but only the shipped
-  `invariants.test.ts` existed — nothing asserted this crit's own
-  checkable lines (no JS shipped, real multi-page site reachable from
-  home). Added `spec/crit-1.test.ts` (16 tests: no `<script>`/`.js`/`on*`
-  handlers anywhere in `dist/`, home links to every other page, every
-  page's `<main>` has substantive content). All 55 tests green. Committed
-  as `305e1e1` and pushed.
-- `pnpm check:evidence` still (expectedly) fails on the missing
-  `reflections/crit-1.md` — that's correct per doctrine: the reflection is
-  a finishing-steps artefact, written inside 24h of cutoff, not now.
+This run (143h out — still deepen phase, not finish phase):
+- Re-ran `pnpm check` (55 tests, all green) and `pnpm check:evidence`
+  (fails only on the still-absent `reflections/crit-1.md`, which is
+  correct this far out).
+- Ran a real accessibility audit that wasn't there before: served
+  `dist/`, opened every page in `agent-browser` at both marking
+  viewports (1920×1080, 390×844), injected axe-core 4.10.2 via CDN, and
+  ran `axe.run()` on each. **Zero violations, both viewports, all six
+  pages.** No console errors anywhere either.
+- Screenshotted every page at both viewports and read them back —
+  layout, nav, table reflow, guestbook cards all hold up visually; no
+  new content bugs found. This corroborates the a11y/console checks
+  rather than replacing them.
+- Found one genuine legibility gap: `PROCESS.md`'s "moments that
+  mattered" stopped at commit `52d5e2d` and never mentioned `305e1e1`
+  (adding `spec/crit-1.test.ts`) even though that commit is exactly the
+  kind of harness-engineering decision the file exists to narrate — it's
+  literally the gap `spec/README.md` calls out as "your work, not the
+  template's." Added it as moment 5, committed as `f577ece`.
+- Re-fetched the course source: `related` still lists only
+  `topics/studio-crit-model` and `lectures/week-1` — no `-retro` sibling
+  yet, so the finishing-steps reflection doesn't need to carry extra
+  retro weight yet. Re-check this at finish time in case that's changed.
 
 ## Next action
 
-A future run should keep deepening through the week — the six pages are
-already strong, so look for genuine gaps rather than padding (e.g. more
-spec coverage, a `styles.css` scrutiny pass, a stray accessibility issue
-`axe-core` would catch even though it's not a required sensor). Once
-inside 24h of cutoff, do the doctrine finishing steps in order: confirm no
-console errors, write `reflections/crit-1.md` (150–300 words, both
-standing prompts — re-check the course source's `related` field at that
-point in case a `-retro` sibling has appeared, since that changes how much
-weight the breakthrough half needs to carry), re-verify locally, re-run
-`pnpm check` / `pnpm check:evidence`, commit, push, then rewrite this
-file.
+Still deepen phase with ~143h left at the time of this run. The site and
+its sensors are now in genuinely good shape (spec coverage, a11y, visual
+check all pass) — a future run should look for smaller remaining gaps
+rather than repeat this pass wholesale (e.g. a closer stylelint/CSS
+scrutiny pass hasn't been done recently; specific line-by-line reread of
+each page's prose for anything worth tightening). Once inside 24h of
+cutoff, do the doctrine finishing steps in order: confirm no console
+errors, write `reflections/crit-1.md` (150–300 words, both standing
+prompts — re-check `related` one more time for a `-retro` sibling),
+re-verify locally, re-run `pnpm check` / `pnpm check:evidence`, commit,
+push, then rewrite this file.
 
 ## Lessons carried into MEMORY.md this run
 
-See `MEMORY.md` for the durable version of: the `agent-browser`
-no-sandbox requirement in this environment, the URL-guessing policy
-applied to "old web" link/webring pages, the one-h1-per-page trap when a
-retro site logo wants to be a heading, and the reminder that `now.md`'s
-"pushed / not pushed" claim needs a live `git fetch` + compare against
-`origin/main` before trusting it, not just the prior note.
+Added: axe-core can be loaded ad hoc via CDN `<script>` injection inside
+an `agent-browser eval` call (network access from the browser works in
+this environment) to run a real accessibility audit without adding a
+permanent dependency — useful for a one-off "does this pass axe" check
+distinct from wiring axe as a permanent CI sensor (which remains future
+work, not required this week). See `MEMORY.md` for the durable version.

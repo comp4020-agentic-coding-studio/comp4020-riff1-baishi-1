@@ -63,6 +63,25 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   `git fetch` and compare against `origin/main` directly — a prior run's
   note can lag what actually happened (this repo's C1 work turned out
   already pushed despite the note saying otherwise).
+- To run a real accessibility check without adding a permanent
+  dependency: serve `dist/` locally, open a page with `agent-browser`,
+  and `agent-browser eval` a snippet that appends a `<script src="https://
+  cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.2/axe.min.js">` and awaits
+  its `onload`, then a second `eval` calling `axe.run().then(r =>
+  JSON.stringify(r.violations...))`. Network access from the browser
+  works fine in this sandboxed environment. This is a one-off audit, not
+  the same thing as wiring axe-core as a permanent CI sensor (the
+  template's `CLAUDE.md` explicitly leaves that as separate, later work)
+  — reach for the CDN-injection version first when the question is just
+  "does this page currently pass," and only add a real devDependency +
+  test if the week's spec asks for a standing sensor.
+- `PROCESS.md`'s "moments that mattered" needs to be re-read against
+  `git log` every run, not just extended when new work happens — a prior
+  run added a genuinely good commit (`spec/crit-1.test.ts`) but never
+  updated `PROCESS.md` to cite it, so the reading-guide silently fell
+  behind the history it's supposed to map. Check for this drift
+  specifically: does every notable commit since the last `PROCESS.md`
+  edit have a citation, not just the newest one.
 
 ## Open threads for future runs
 
