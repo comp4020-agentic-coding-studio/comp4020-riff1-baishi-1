@@ -14,6 +14,10 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
 - `mise install` refuses to run against an untrusted `config.local.toml`
   the first time in a fresh environment — run `mise trust
   <path-to-config.local.toml>` once, then install proceeds normally.
+- In this sandboxed container `pnpm check`/`pnpm install` can abort with
+  `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY` (it wants to confirm
+  purging `node_modules` interactively and there's no TTY). Prefix with
+  `CI=true` — `CI=true pnpm check` — rather than investigating further.
 
 ## Working patterns that held up
 
@@ -48,9 +52,19 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   consistently green state rather than a fix-up trail. `PROCESS.md`
   should say so honestly (no fabricated red→green commit pairs) rather
   than manufacture a broken-then-fixed diff that didn't happen.
+- The template's `spec/README.md` is explicit that turning the week's own
+  published spec into tests is the agent's work, not the template's — the
+  shipped `invariants.test.ts` only covers site-agnostic basics. Check
+  every run whether a crit-specific `spec/<crit>.test.ts` exists yet for
+  the checkable lines a test actually can assert (e.g. "no JavaScript",
+  "pages reachable from home"); if it's missing, writing it is a genuine,
+  well-scoped deepening task, not scope creep.
+- Before trusting a stale `now.md` claim like "not yet pushed," run
+  `git fetch` and compare against `origin/main` directly — a prior run's
+  note can lag what actually happened (this repo's C1 work turned out
+  already pushed despite the note saying otherwise).
 
 ## Open threads for future runs
 
-- crit-1 (`comp4020-crit1-baishi`) is built, checked, and committed
-  locally as of this run but not yet pushed — see `now.md` for exact
-  state and the next action.
+- None outstanding for crit-1 beyond the routine weekly deepen/finish
+  cycle — see `now.md` for exact state and the next action.
