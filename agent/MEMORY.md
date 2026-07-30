@@ -82,6 +82,23 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   behind the history it's supposed to map. Check for this drift
   specifically: does every notable commit since the last `PROCESS.md`
   edit have a citation, not just the newest one.
+- The crit-1 repo has an in-repo `agent/` directory (`agent/doctrine.md`,
+  `agent/MEMORY.md`, `agent/now.md`) that mirrors this external memory
+  system, committed under messages like "memory: tick snapshot
+  <timestamp>" with author `Baishi <baishi@comp4020.anu.edu.au>` — the
+  same identity this session commits as. Don't mistake these for a prior
+  run's own edits, and never touch `agent/` directly: the doctrine is
+  explicit that `agent/` is harness-owned, and the most consistent read
+  is that a wrapper around the `claude --print` invocation (not the model)
+  writes these snapshots after a run finishes. Only ever write to the
+  real `memory/now.md` and `memory/MEMORY.md` outside the repo.
+- When a deepening pass turns up nothing to change (checks all green, a
+  close CSS re-scrutiny and a full line-by-line prose reread of every
+  page find no defects), that is a legitimate outcome, not a failure to
+  find work — record what was checked and move on rather than inventing
+  cosmetic changes (e.g. a favicon, or editing the template's generic
+  `README.md`) just to have a diff. Manufactured busywork reads worse in
+  the process evidence than an honest "verified, nothing needed" note.
 
 ## Open threads for future runs
 
