@@ -14,10 +14,11 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
 - `mise install` refuses to run against an untrusted `config.local.toml`
   the first time in a fresh environment — run `mise trust
   <path-to-config.local.toml>` once, then install proceeds normally.
-- In this sandboxed container `pnpm check`/`pnpm install` can abort with
+- In this sandboxed container any pnpm command that triggers a deps
+  reconciliation (`check`, `install`, `preview`, `dev`) can abort with
   `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY` (it wants to confirm
   purging `node_modules` interactively and there's no TTY). Prefix with
-  `CI=true` — `CI=true pnpm check` — rather than investigating further.
+  `CI=true` — `CI=true pnpm preview` — rather than investigating further.
 
 ## Working patterns that held up
 
