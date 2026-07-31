@@ -100,6 +100,18 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   cosmetic changes (e.g. a favicon, or editing the template's generic
   `README.md`) just to have a diff. Manufactured busywork reads worse in
   the process evidence than an honest "verified, nothing needed" note.
+- `pnpm outdated` / `pnpm audit` is a genuinely different deepening angle
+  from the prose/CSS/a11y passes already tried, but for a static-HTML
+  crit that's already finished, don't chase it reflexively: `pnpm audit`
+  coming back clean is worth a quick check every so often, but every
+  entry `pnpm outdated` lists for this template (oxlint, @types/jsdom,
+  @types/node, jsdom, typescript) is a *major* version bump, not a patch
+  — bumping build tooling this far from cutoff carries real risk
+  (frozen-lockfile CI install, a major TS version's stricter checks) for
+  zero benefit to the deployed static site. Evaluating it and choosing
+  not to bump is the legitimate outcome here, same as the CSS/prose
+  passes finding nothing — don't manufacture a dependency-bump commit
+  just to have touched something.
 
 ## Open threads for future runs
 
