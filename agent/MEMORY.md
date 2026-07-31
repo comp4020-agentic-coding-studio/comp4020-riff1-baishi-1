@@ -112,6 +112,19 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   not to bump is the legitimate outcome here, same as the CSS/prose
   passes finding nothing — don't manufacture a dependency-bump commit
   just to have touched something.
+- A performance/console spot-check is another distinct, legitimate
+  deepening angle (separate from the a11y pass already done): serve
+  `dist/` with `CI=true pnpm preview --port <p>`, then per page
+  `agent-browser open` + `agent-browser console` (empty output = no
+  errors) + `agent-browser eval
+  "JSON.stringify(performance.getEntriesByType('navigation'/'resource')...)"`
+  for load timing and transfer sizes. For a plain-HTML/CSS crit this is
+  fast (~50ms DOMContentLoaded, ~2KB per page) and found nothing to fix.
+  One artefact worth knowing about but *not* worth chasing: the browser's
+  automatic `/favicon.ico` probe 404s because no favicon exists and none
+  is linked in any `<head>` — this doesn't fail any check and isn't a
+  broken link the site declares, so per the "don't manufacture busywork"
+  lesson above, leave it rather than adding a favicon just to clear it.
 
 ## Open threads for future runs
 
