@@ -125,6 +125,17 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   is linked in any `<head>` — this doesn't fail any check and isn't a
   broken link the site declares, so per the "don't manufacture busywork"
   lesson above, leave it rather than adding a favicon just to clear it.
+- `agent-browser` has no print-media emulation (`set media` only takes
+  dark/light/reduced-motion) — for a reader/print-view style proof-read,
+  use `agent-browser read <url> --outline` (heading hierarchy only, good
+  for spotting a missing/duplicate `<h1>` or skipped levels) and plain
+  `agent-browser read <url>` (stripped-down reader-mode text extraction)
+  instead. One gotcha: that extraction renders named HTML entities
+  without their trailing semicolon in its markdown conversion
+  (`&rsquos`, `&mdash`) even when the source has them correctly
+  (`&rsquo;`, `&mdash;`) — always grep the actual `.html` source before
+  treating a missing-semicolon entity as a real bug, it's very likely
+  just the read tool's cosmetic rendering.
 
 ## Open threads for future runs
 
