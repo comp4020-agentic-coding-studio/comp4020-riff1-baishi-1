@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-01
+updated: 2026-08-02
 deliverable: comp4020-crit1-baishi
 ---
 
@@ -8,61 +8,61 @@ deliverable: comp4020-crit1-baishi
 ## State
 
 crit-1 ("forgotten web") is built, checked, committed, and **pushed** —
-`origin/main` matches local HEAD (`788fb78`). `git status` clean. Repo is
-still private (deploy/CI stay skipped while private).
+`origin/main` matches local HEAD. `git status` clean. Repo is still
+private (deploy/CI stay skipped while private).
 
 The site: **Ten Thousand Shrimp**, a 1999-style unofficial shrine to
 painter Qi Baishi — pure HTML/CSS, no JS. Six pages, all reachable from
 home, all read genuinely well.
 
-This run (82h out — still deepen phase): re-verified course source
-matched memory (no change; `related` now also lists `topics/assessment`
-alongside the two already known, still no `-retro` sibling). Re-ran
-`CI=true pnpm check`: 55 tests green, build clean, no drift. Ran
-`pnpm audit`: still no known vulnerabilities.
+This run (71h out — still deepen phase): re-verified course source
+matched memory exactly (no change; `related` still just
+`topics/studio-crit-model`, `topics/assessment`, `lectures/week-1`, no
+`-retro` sibling). Re-ran `CI=true pnpm check`: 55 tests green, build
+clean, no drift.
 
-Attempted a seventh deepening angle (both-viewport visual screenshots at
-1920×1080/390×844 via `agent-browser`) before realising, from timestamped
-files already in `/tmp/shots/`, that this exact check was already done
-twice before (2026-07-29 and 2026-07-30) — not a genuinely new angle, so
-abandoned it rather than manufacture a third repeat. In the process, a
-malformed `agent-browser screenshot` invocation (passed `--full-page`,
-which the tool doesn't recognise as a flag — it's `-f`/`--full` — so it
-was parsed as the destination *path*) created a stray untracked PNG at
-the repo root; caught it via `git status` before it could be committed
-and deleted it. Lesson recorded in MEMORY.md.
+Tried an eighth deepening angle, genuinely new this time: HTML
+validation via `pnpm dlx html-validate dist/*.html` (ad-hoc, not added
+as a dependency — same one-off-audit pattern as the axe-core CDN
+check). Result: 43 findings, but every single one is either
+`doctype-style` (wants uppercase `<!DOCTYPE html>`) or `void-style`
+(wants `<br>`/`<meta>`/`<hr>` without the self-closing slash) — the
+tool's default preset assumes an older HTML-authoring convention that's
+actually the *opposite* of this project's already-consistent modern
+style (lowercase doctype, self-closing void elements, matching Vite's
+own template output). No other rule category fired at all — no
+duplicate IDs, no missing alts, no invalid nesting — which is itself a
+useful confirmation of structural soundness. Nothing to change; adopting
+this tool's stylistic opinion would make the markup *less* consistent
+with its own convention, not more correct. Recorded as a legitimate
+"found nothing" outcome, not a gap.
 
-No code changes this run — nothing to change was found again, same as
-the six deepening passes before it.
+No code changes this run.
 
 ## Next action
 
-Still deepen phase with ~82h left at the time of this run. Seven
-different kinds of scrutiny have now found nothing to change (the
-seventh being an accidental repeat, not new). A future run before the
-24h mark should treat "found nothing again" as fine and not force
-another angle just to have one — check `/tmp/shots/` (or wherever
-screenshots landed) for what's already been tried before picking a
-"new" one, since ephemeral `/tmp` artefacts from earlier runs are the
-only record of what a prior session actually did beyond what's written
-in MEMORY.md/PROCESS.md. If something genuinely new occurs (e.g. actual
-screen-reader testing rather than axe-core's static audit, if that
-becomes feasible), it's worth trying. Otherwise, once inside 24h of
-cutoff, do the doctrine finishing steps in order: confirm no console
-errors (already current), write `reflections/crit-1.md` (150–300 words,
-breakthrough prompt first, then re-check `related` one more time for a
-`-retro` sibling — still only `topics/studio-crit-model`,
-`topics/assessment`, and `lectures/week-1` as of this run), re-verify
-locally, re-run `pnpm check` / `pnpm check:evidence`, commit, push, then
-rewrite this file.
+Still deepen phase with ~71h left at the time of this run. Eight
+different kinds of scrutiny (prose reread, CSS reread, a11y/axe-core,
+performance/console, dependency audit/outdated, two rounds of viewport
+screenshots, now HTML validation) have found nothing to change. A
+future run should keep treating "found nothing again" as a fine
+outcome and not force a fresh angle just to have one — re-running the
+same checks with no drift is itself useful confirmation, not wasted
+effort. If something genuinely new occurs (e.g. actual screen-reader
+testing rather than axe-core's static audit, if that becomes feasible),
+it's worth trying. Otherwise, once inside 24h of cutoff, do the
+doctrine finishing steps in order: confirm no console errors (already
+current), write `reflections/crit-1.md` (150–300 words, breakthrough
+prompt first, then re-check `related` one more time for a `-retro`
+sibling), re-verify locally, re-run `pnpm check` / `pnpm check:evidence`,
+commit, push, then rewrite this file.
 
 ## Lessons carried into MEMORY.md this run
 
-Added a note that `agent-browser screenshot`'s second positional arg is
-a destination path, not a flag slot — `--full-page` isn't a recognised
-flag (it's `--full`/`-f`) and gets silently treated as the path,
-writing a stray file at whatever cwd the command ran from. Also noted:
-before treating a viewport/visual screenshot pass as a fresh deepening
-angle, check `/tmp/shots/` (or the equivalent scratch dir) for
-timestamped files from earlier runs first — this angle had already been
-done twice.
+Added a note on running `html-validate` as a one-off audit: its default
+preset's `doctype-style`/`void-style` rules assume an older HTML
+convention and will flag a perfectly modern, internally-consistent
+HTML5 file (lowercase doctype, self-closing void tags) as "wrong" —
+don't treat those two rule categories as real defects; check whether
+any *other* rule fired (duplicate IDs, missing alts, invalid nesting)
+before concluding there's something to fix.

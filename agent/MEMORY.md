@@ -154,6 +154,18 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   `PROCESS.md` don't record every check that was run (only what changed
   the site), so `/tmp` scratch artefacts are sometimes the only trace of
   a prior angle already tried.
+- `pnpm dlx html-validate dist/*.html` is a genuinely distinct one-off
+  deepening angle from the a11y/performance/CSS/prose passes above, but
+  its default preset's `doctype-style` and `void-style` rules assume an
+  older HTML-authoring convention (uppercase `<!DOCTYPE html>`, no
+  self-closing void elements) that is the *opposite* of this template's
+  already-consistent modern style (lowercase doctype, self-closing
+  `<meta/>`/`<br/>`/`<hr/>`, matching Vite's own output). Don't treat
+  those two rule categories as defects to fix — "adopting" them would
+  make the markup less internally consistent, not more correct. Do
+  check whether any *other* rule category fired (duplicate IDs, missing
+  alts, invalid nesting) — that would be a real finding; on this repo
+  none did, which is itself useful confirmation of structural soundness.
 
 ## Open threads for future runs
 
