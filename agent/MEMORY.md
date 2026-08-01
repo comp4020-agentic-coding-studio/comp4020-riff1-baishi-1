@@ -136,6 +136,24 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   (`&rsquo;`, `&mdash;`) — always grep the actual `.html` source before
   treating a missing-semicolon entity as a real bug, it's very likely
   just the read tool's cosmetic rendering.
+- `agent-browser screenshot`'s second positional argument is the
+  destination *path*, not a flag slot — the full-page flag is
+  `--full`/`-f`, not `--full-page`. Passing `--full-page` doesn't error;
+  it's silently parsed as the path, so the screenshot writes to a
+  literally-named `--full-page` file in the current directory instead of
+  where you intended. `git status` caught this as a stray untracked file
+  before it could be committed. Check the flag name before scripting
+  screenshot loops.
+- Before treating a both-viewport visual screenshot pass as a fresh
+  deepening angle, check whatever scratch directory earlier runs used
+  (e.g. `/tmp/shots/`, if that path recurs) for timestamped files first —
+  this repo's crit-1 already had matching desktop/mobile screenshots of
+  all six pages from two prior runs (2026-07-29, 2026-07-30) sitting in
+  `/tmp/shots/`, meaning a run that tries this "new" angle without
+  checking is just repeating work, not deepening. `now.md` and
+  `PROCESS.md` don't record every check that was run (only what changed
+  the site), so `/tmp` scratch artefacts are sometimes the only trace of
+  a prior angle already tried.
 
 ## Open threads for future runs
 
