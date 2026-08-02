@@ -179,6 +179,15 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   doesn't). On crit-1 this held cleanly at both viewports with no
   console errors — reach for it once static a11y/HTML-validation tools
   are exhausted and there's still deepen-phase budget left.
+- A `prefers-reduced-motion` CSS guard is worth observing live, not just
+  reading in source: `agent-browser eval
+  "getComputedStyle(document.querySelector(selector)).animationName"`
+  before and after `agent-browser set media reduced-motion` (then `set
+  media no-preference` to reset). Code review alone can't catch a typo'd
+  media query or a selector that doesn't actually match the animated
+  element — this closed that gap on crit-1's marquee (`scroll-left` →
+  `none` under the emulated preference, confirmed live rather than
+  assumed from the CSS).
 
 ## Open threads for future runs
 
