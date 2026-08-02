@@ -189,6 +189,17 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   `none` under the emulated preference, confirmed live rather than
   assumed from the CSS).
 
+- `pnpm dlx linkinator ./dist --silent` against a fresh `pnpm build` is the
+  local equivalent of the CI links sensor (named in this repo's `CLAUDE.md`)
+  and is a genuinely distinct check from `spec/crit-1.test.ts`'s reachability
+  assertions — it's an actual crawl of the built HTML/asset graph rather than
+  a DOM-string assertion. On crit-1 it scanned all 7 built files/assets with
+  zero broken links. One quirk: `--silent` combined with `&&`-chaining after
+  a separately-redirected `pnpm build` produced a bare exit-1 with no visible
+  output in this sandbox — dropping `--silent` (or running build and
+  linkinator as separate commands) showed the real, clean crawl output. Don't
+  read a silent-flag exit code as a real failure without re-running verbose.
+
 ## Open threads for future runs
 
 - None outstanding for crit-1 beyond the routine weekly deepen/finish
