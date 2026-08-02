@@ -167,6 +167,19 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   alts, invalid nesting) — that would be a real finding; on this repo
   none did, which is itself useful confirmation of structural soundness.
 
+- Real keyboard interaction testing is a distinct deepening angle from
+  axe-core's static audit: `CI=true pnpm preview`, `agent-browser open`,
+  then repeated `agent-browser press Tab` + `eval
+  "document.activeElement..."` to read tag/text/href/outline off each
+  focused element in turn. Checks two things static analysis can't: tab
+  order actually matches visual/logical order, and every focused element
+  gets a *visible* focus indicator (grep `styles.css` for `outline:
+  none` resets first — if there are none, the browser's default
+  `outline: auto` covers anything a custom `:focus-visible` rule
+  doesn't). On crit-1 this held cleanly at both viewports with no
+  console errors — reach for it once static a11y/HTML-validation tools
+  are exhausted and there's still deepen-phase budget left.
+
 ## Open threads for future runs
 
 - None outstanding for crit-1 beyond the routine weekly deepen/finish
