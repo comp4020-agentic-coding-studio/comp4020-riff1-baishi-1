@@ -8,44 +8,43 @@ deliverable: comp4020-crit1-baishi
 ## State
 
 crit-1 ("forgotten web") is built, checked, committed, and **pushed** —
-`origin/main` matches local HEAD (`c469a0a`). `git status` clean. Repo is
+`origin/main` matches local HEAD (`354ee05`). `git status` clean. Repo is
 still private (deploy/CI stay skipped while private).
 
 The site: **Ten Thousand Shrimp**, a 1999-style unofficial shrine to
 painter Qi Baishi — pure HTML/CSS, no JS. Six pages, all reachable from
 home, all read genuinely well.
 
-This run (47h out — still deepen phase): re-fetched the course source,
-confirmed byte-for-byte match with what's in memory (still no `-retro`
-sibling in `related`, spec unchanged). Re-ran `CI=true pnpm check`: 55
-tests green, build clean, zero lint/typecheck output. `git status`
-clean throughout — no code changes this run.
+This run (40h out — still deepen phase): re-fetched the course source,
+byte-for-byte unchanged (still no `-retro` sibling in `related`, spec
+unchanged). Re-ran `CI=true pnpm check`: 55 tests green, build clean,
+zero lint/typecheck output. `git status` clean throughout — no code
+changes this run.
 
-Tried an eleventh deepening angle, genuinely new: ran
-`pnpm dlx linkinator ./dist` (the local equivalent of the CI links
-sensor per this repo's `CLAUDE.md`) against a fresh build — a real
-crawl of the built HTML/asset graph, distinct from `spec/crit-1.test.ts`'s
-in-DOM reachability assertions. Scanned all 7 built files/assets, zero
-broken links. Also ran `CI=true pnpm check:evidence` — the only failure
-is the expected one (no `reflections/crit-1.md` yet), which is correct:
-doctrine treats writing the reflection as a finishing step inside 24h,
-and we're at 47h.
+Followed up on the one open thread from last run: read `PROCESS.md`
+against `git log --all` for citation drift. No drift — every commit
+since `PROCESS.md`'s last edit (`f577ece`) is a memory tick, a
+gitignore fix, or a reflections-wording change, none of which are
+"moments that mattered" worth citing. PROCESS.md's three cited commits
+(`bc04184`, `52d5e2d`, `305e1e1`) still fully cover the real content
+history.
 
-No code changes this run — eleven deepening angles now (prose reread,
-CSS reread, a11y/axe-core, performance/console, dependency
-audit/outdated, two rounds of viewport screenshots, HTML validation,
-keyboard tab-order/focus, live reduced-motion verification, links
-crawl via linkinator) have all found nothing to change.
+No new deepening angle found this run — eleven were already tried and
+exhausted as of the last tick (prose reread, CSS reread, a11y/axe-core,
+performance/console, dependency audit/outdated, two rounds of viewport
+screenshots, HTML validation, keyboard tab-order/focus, live
+reduced-motion verification, links crawl via linkinator), and this
+run's PROCESS.md-drift check is the twelfth, also negative.
 
 ## Next action
 
-Still deepen phase with ~47h left at the time of this run. Keep
-treating "found nothing again" as a fine outcome rather than forcing a
-fresh angle to have one — but a genuinely new angle, when one occurs,
-is still worth the ~10 minutes it costs. Nothing obvious comes to mind
-for a further angle on a finished plain-HTML/CSS site; re-reading
-`PROCESS.md` against `git log --all` for citation drift is always
-worth a quick re-check next run since it's cheap.
+Still deepen phase with ~40h left at the time of this run. Genuinely
+nothing obvious remains to check on a finished plain-HTML/CSS site —
+twelve independent angles have now all confirmed the site is sound.
+Future deepen-phase runs before 24h should mostly just: re-fetch the
+course source (confirm no `-retro` sibling, spec still unchanged),
+re-run `CI=true pnpm check`, and stop if nothing changed — forcing a
+thirteenth novel angle is not worth manufacturing.
 
 Once inside 24h of cutoff, do the doctrine finishing steps in order:
 confirm no console errors (already current), write
@@ -56,7 +55,5 @@ push, then rewrite this file.
 
 ## Lessons carried into MEMORY.md this run
 
-Added a note on `pnpm dlx linkinator ./dist` as a genuinely distinct
-links-check angle (real crawl of built output vs. the spec suite's DOM
-assertions), plus the `--silent`-flag-swallows-real-output gotcha hit
-while running it.
+None new — this run's only finding (PROCESS.md has no citation drift)
+confirms existing practice rather than adding a new lesson.
