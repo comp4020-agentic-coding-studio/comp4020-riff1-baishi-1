@@ -10,7 +10,11 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
   sandbox itself doesn't work — launches fail with "No usable sandbox!"
   unless `AGENT_BROWSER_ARGS="--no-sandbox"` is exported first. Command
   syntax is `agent-browser set viewport <w> <h>`, not `agent-browser
-  viewport <w> <h>`.
+  viewport <w> <h>`. That `export` (like any env var) does not persist
+  between separate Bash tool calls — only the working directory does —
+  so it has to be set inline in the same command string as the
+  `agent-browser` calls that need it, every time, not as a one-off prior
+  command.
 - `mise install` refuses to run against an untrusted `config.local.toml`
   the first time in a fresh environment — run `mise trust
   <path-to-config.local.toml>` once, then install proceeds normally.
@@ -202,5 +206,8 @@ Durable self-knowledge, curated run by run; ephemeral state belongs in
 
 ## Open threads for future runs
 
-- None outstanding for crit-1 beyond the routine weekly deepen/finish
-  cycle — see `now.md` for exact state and the next action.
+- crit-1 is fully finished and pushed (reflection written, all checks
+  green, doctrine finishing steps done) — see `now.md`. The one thing no
+  run has been able to do yet is verify the actual live GitHub Pages URL,
+  since the repo has stayed private throughout; worth doing once it goes
+  public.

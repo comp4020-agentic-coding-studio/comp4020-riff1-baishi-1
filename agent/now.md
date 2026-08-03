@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-03
+updated: 2026-08-04
 deliverable: comp4020-crit1-baishi
 ---
 
@@ -7,43 +7,63 @@ deliverable: comp4020-crit1-baishi
 
 ## State
 
-crit-1 ("forgotten web") is built, checked, committed, and **pushed** —
-`origin/main` matches local HEAD. `git status` clean. Repo is still
-private (deploy/CI stay skipped while private).
+crit-1 ("forgotten web") is **fully finished and shipped**. This run (23h
+out — inside the 24h finishing window per the doctrine clock) completed
+the last outstanding finishing step: `reflections/crit-1.md` didn't exist
+yet (only `reflections/README.md` was present), so I wrote it — headed
+"Forgotten web" (the course source's title, not a week number), 281
+words, breakthrough prompt first (the `pnpm check` run that failed
+`expected 2 to be 1` on the wordmark/`<h1>` clash and how I let the
+invariant win rather than routing around it), then the developer-identity
+prompt (building with the sensor running, letting a red result reshape
+the design rather than patch around it after the fact).
 
-The site: **Ten Thousand Shrimp**, a 1999-style unofficial shrine to
-painter Qi Baishi — pure HTML/CSS, no JS. Six pages, all reachable from
-home, all read genuinely well.
+Before writing it I re-fetched the course source byte-for-byte: title
+still "Forgotten web", `related` still `[studio-crit-model, assessment,
+week-1]` — no `-retro` sibling, so this reflection entry only ever needs
+to serve this one deliverable, not double as a retro's second half.
 
-This run (34h out — still deepen phase, not yet inside the 24h finishing
-window): re-fetched the course source, byte-for-byte unchanged (still no
-`-retro` sibling in `related`, spec still just "Forgotten web"). Re-ran
-`CI=true pnpm check`: 55 tests green, build clean, zero lint/typecheck
-output. Re-checked `PROCESS.md` citation drift against `git log` since
-its last edit (`f577ece`) — same set of commits as last run's check
-(memory ticks, one gitignore fix, one reflections-wording change), none
-citable. `git status` clean throughout — no code changes this run.
+Re-ran the full finishing checklist:
+- `CI=true pnpm check`: 55 tests green, clean build, zero lint/typecheck
+  output.
+- `CI=true pnpm check:evidence`: reflections/ now has 1 entry (was 0),
+  PROCESS.md's 3 cited commits all resolve.
+- Served `dist/` with `CI=true pnpm preview --port 4321`, opened all six
+  pages with `agent-browser` (`AGENT_BROWSER_ARGS="--no-sandbox"` inline
+  in the same Bash call — it does NOT persist across separate Bash
+  calls, has to be in the same invocation as the `agent-browser`
+  commands), `agent-browser console` empty on every page. Killed the
+  preview server after.
+- Committed the reflection alone (`1c15139`, "reflections: write the
+  crit-1 entry, the breakthrough and takeaway"), `git status` clean,
+  pushed. `origin/main` now at `1c15139`.
+- Tried to verify the live URL (doctrine step 6) but both the repo page
+  and the GitHub Pages URL return 404 unauthenticated — consistent with
+  the repo still being private. Per doctrine step 7 and prior runs'
+  notes, publishing/deploy is done by a separate trusted harness after
+  cutoff; I never get its credential, so this 404 is expected, not a
+  problem to chase.
 
-No new deepening angle attempted; per last run's note, thirteen would be
-manufacturing work on a site twelve independent checks have already
-confirmed sound. This run just re-verified the invariants still hold.
+PROCESS.md was re-checked for citation drift against `git log` since its
+last edit — same as prior runs, no new citable commits (this run's own
+reflections commit doesn't need a PROCESS.md citation; PROCESS.md cites
+build-decision moments, and writing the reflection isn't one of those).
 
 ## Next action
 
-Still deepen phase (34h left at time of this run, finishing steps only
-trigger inside 24h). Future deepen-phase runs before 24h: re-fetch the
-course source (confirm no `-retro` sibling, spec still unchanged),
-re-run `CI=true pnpm check`, check `PROCESS.md` for citation drift, and
-stop if nothing changed. Don't force a novel angle just to have one.
-
-Once inside 24h of cutoff, do the doctrine finishing steps in order:
-confirm no console errors (already current), write
-`reflections/crit-1.md` (150–300 words, breakthrough prompt first, then
-re-check `related` one more time for a `-retro` sibling — none so far),
-re-verify locally, re-run `pnpm check` / `pnpm check:evidence`, commit,
-push, then rewrite this file.
+Crit-1 is done: all doctrine finishing steps complete, tree clean, pushed.
+Nothing left to build. Any future run before the marking sweep should
+just re-verify (re-fetch course source for drift, re-run `pnpm check` /
+`check:evidence`, confirm still pushed and clean) rather than opening a
+new direction — per doctrine step "then stop," don't re-run the routine
+once it's done. Once the repo goes public/deploys, a genuinely new check
+becomes available: verify the actual live GitHub Pages URL end to end
+(not just localhost), which no run has been able to do yet since the
+repo has stayed private throughout.
 
 ## Lessons carried into MEMORY.md this run
 
-None new — this run only re-confirmed existing findings (spec unchanged,
-checks green, no PROCESS.md drift), no novel discovery.
+- `AGENT_BROWSER_ARGS` (and any exported env var) does not persist
+  between separate Bash tool calls in this harness — only cwd does. Put
+  the `export` in the same command string as the `agent-browser`
+  invocations that need it, every time, not as a one-off prior command.
