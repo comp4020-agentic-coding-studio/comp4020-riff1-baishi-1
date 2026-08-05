@@ -11,8 +11,9 @@
       <header>
         <div class="marquee" role="presentation">
           <p>
-            no photographs here, only words ~*~ the paintings themselves
-            live in real museums, follow the links page ~*~
+            three real works, public domain, credited below ~*~ three
+            subjects with no clean rights we could find get a sketch of
+            our own instead ~*~
           </p>
         </div>
         <div class="site-title">
@@ -32,15 +33,18 @@
         </nav>
       </header>
 
-      <main>
+      <div class="layout">
+        <main>
         <h1>A gallery in words</h1>
         <p data-testid="intro">
-          This shrine does not reproduce the paintings themselves &mdash;
-          most are still under copyright somewhere, and a jpeg would flatten
-          the ink anyway. Instead: a describer&rsquo;s gallery, the
-          subjects he returned to again and again, for the years he made
-          them famous. Visit the <a href="links.html">further reading</a>
-          page for museums that hold the real thing.
+          Most reproductions of his paintings are still under copyright
+          somewhere &mdash; Qi Baishi died in 1957, and the standard
+          life-plus-70 clock hasn&rsquo;t run out yet in the US or most of
+          Europe. Where we found a work with a clear public-domain or
+          CC-licensed source, it&rsquo;s here, credited. Where we
+          couldn&rsquo;t, you get a small ink sketch of our own instead of
+          a borrowed jpeg. Visit the <a href="links.html">further
+          reading</a> page for museums that hold the real thing.
         </p>
 
         <div class="gallery-wrap">
@@ -48,6 +52,7 @@
             <caption>Recurring subjects, roughly by the decade they came to define him</caption>
             <thead>
               <tr>
+                <th scope="col">Image</th>
                 <th scope="col">Subject</th>
                 <th scope="col">Decade</th>
                 <th scope="col">What&rsquo;s on the paper</th>
@@ -55,6 +60,12 @@
             </thead>
             <tbody>
               <tr>
+                <td>
+                  <figure class="gallery-figure">
+                    <img src="./images/shrimp.jpg" alt="Shrimp painted by Qi Baishi on an everyday object" width="72" height="72" loading="lazy" />
+                    <figcaption>photo: Immanuel Giel, <a href="https://commons.wikimedia.org/wiki/File:QiBaishiGarnelen.jpg">Wikimedia Commons</a>, CC BY-SA 3.0</figcaption>
+                  </figure>
+                </td>
                 <td>Shrimp</td>
                 <td>1920s&ndash;50s</td>
                 <td>
@@ -67,6 +78,7 @@
                 </td>
               </tr>
               <tr>
+                <td><img src="./images/crabs.svg" alt="Ink-wash sketch of a crab" width="72" height="72" loading="lazy" /></td>
                 <td>Crabs</td>
                 <td>1920s&ndash;40s</td>
                 <td>
@@ -77,6 +89,7 @@
                 </td>
               </tr>
               <tr>
+                <td><img src="./images/chicks.svg" alt="Ink-wash sketch of a chick beside a grain of rice" width="72" height="72" loading="lazy" /></td>
                 <td>Chicks and roosters</td>
                 <td>1930s&ndash;40s</td>
                 <td>
@@ -87,6 +100,12 @@
                 </td>
               </tr>
               <tr>
+                <td>
+                  <figure class="gallery-figure">
+                    <img src="./images/vegetables.jpg" alt="Old Man Looking into a Gourd, ink on paper, by Qi Baishi" width="72" height="72" loading="lazy" />
+                    <figcaption>Asian Art Museum of San Francisco, <a href="https://commons.wikimedia.org/wiki/File:Old_Man_Looking_into_a_Gourd,_by_Qi_Baishi,_ink_on_paper_-_Asian_Art_Museum_of_San_Francisco_-_DSC01548.JPG">Wikimedia Commons</a>, CC0</figcaption>
+                  </figure>
+                </td>
                 <td>Vegetables and gourds</td>
                 <td>1930s&ndash;50s</td>
                 <td>
@@ -97,6 +116,12 @@
                 </td>
               </tr>
               <tr>
+                <td>
+                  <figure class="gallery-figure">
+                    <img src="./images/insects.jpg" alt="Leaves and Insects, ink painting by Qi Baishi" width="72" height="72" loading="lazy" />
+                    <figcaption>via Gianguan Auctions, <a href="https://commons.wikimedia.org/wiki/File:Leaves_and_Insects_by_Qi_Baishi_.jpg">Wikimedia Commons</a>, PD-China</figcaption>
+                  </figure>
+                </td>
                 <td>Insects</td>
                 <td>throughout his career</td>
                 <td>
@@ -107,6 +132,7 @@
                 </td>
               </tr>
               <tr>
+                <td><img src="./images/mice.svg" alt="Ink-wash sketch of a mouse mid-theft" width="72" height="72" loading="lazy" /></td>
                 <td>Mice</td>
                 <td>1940s</td>
                 <td>
@@ -127,7 +153,32 @@
             🐛<br />MORE<br />SUBJECTS<br />COMING SOON
           </div>
         </div>
-      </main>
+        </main>
+
+        <aside class="site-links" aria-labelledby="site-links-heading">
+          <h2 id="site-links-heading">Where the real paintings live</h2>
+          <p>
+            Major public collections of Qi Baishi&rsquo;s work. No links
+            &mdash; museums move and paywall, so search each
+            collection&rsquo;s own catalogue directly:
+          </p>
+          <ul>
+            <li>National Art Museum of China, Beijing</li>
+            <li>Beijing Fine Art Academy</li>
+            <li>The Palace Museum</li>
+            <li>Metropolitan Museum of Art, New York</li>
+            <li>British Museum, London</li>
+          </ul>
+          <p class="panel-note">
+            That search box is more durable than any link this page could
+            print.
+          </p>
+          <hr class="rule panel-rule" />
+          <p>
+            <a href="links.html">Full bibliography &amp; further reading</a>
+          </p>
+        </aside>
+      </div>
 
       <footer>
         <p>&copy; a small shrine, maintained with a brush and a stubborn CSS file.</p>
